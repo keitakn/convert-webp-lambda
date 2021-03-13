@@ -22,3 +22,13 @@ bin
 
 # node_modules
 node_modules
+
+# IDE Setting Files
+.idea
+
+# Serverless directories
+.serverless
+
+# env file
+.env
+.envrc
