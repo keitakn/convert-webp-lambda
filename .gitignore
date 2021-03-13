@@ -13,3 +13,22 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# goenv setting file
+.go-version
+
+# go build output
+bin
+
+# node_modules
+node_modules
+
+# IDE Setting Files
+.idea
+
+# Serverless directories
+.serverless
+
+# env file
+.env
+.envrc
