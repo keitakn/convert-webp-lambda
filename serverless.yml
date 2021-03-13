@@ -1,0 +1,48 @@
+service: convert-webp-lambda
+
+frameworkVersion: '>=2.0.0 <3.0.0'
+
+plugins:
+  - serverless-prune-plugin
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: ${env:DEPLOY_STAGE}
+  region: ${env:REGION}
+  profile: ${self:custom.profiles.${self:provider.stage}}
+  logRetentionInDays: 3
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "*"
+  environment:
+    DEPLOY_STAGE: ${env:DEPLOY_STAGE}
+    TRIGGER_BUCKET_NAME: ${env:TRIGGER_BUCKET_NAME}
+
+custom:
+  defaultStage: dev
+  profiles:
+    dev: nekochans-dev
+  prune:
+    automatic: true
+    number: 1
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  convertToWebp:
+    handler: bin/converttowebp
+    events:
+      - s3:
+          bucket: ${env:TRIGGER_BUCKET_NAME}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploads/
+            - suffix: .jpg
+          existing: true

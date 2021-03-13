@@ -1,0 +1,9 @@
+node_modules
+.envrc
+.gitignore
+.go-version
+package.json
+package-lock.json
+serverless.yml
+LICENSE
+README.md

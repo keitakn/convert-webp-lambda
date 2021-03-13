@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  go:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    command: 'tail -f /dev/null'
+    volumes:
+      - ./:/go/app
+      - node_modules:/go/app/node_modules
+volumes:
+  node_modules:
+    driver: 'local'

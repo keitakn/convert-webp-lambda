@@ -1,0 +1,24 @@
+{
+  "name": "convert-webp-lambda",
+  "version": "1.0.0",
+  "description": "S3にアップロードされた画像をWebpに変換するLambda関数のサンプルコード",
+  "scripts": {
+    "deploy": "serverless deploy -v",
+    "remove": "serverless remove -v",
+    "set:dev-aws-credentials": "serverless config credentials --provider aws --key $DEV_AWS_ACCESS_KEY_ID --secret $DEV_AWS_SECRET_ACCESS_KEY --profile nekochans-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keitakn/convert-webp-lambda.git"
+  },
+  "author": "https://github.com/keitakn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/keitakn/convert-webp-lambda/issues"
+  },
+  "homepage": "https://github.com/keitakn/convert-webp-lambda#readme",
+  "devDependencies": {
+    "serverless": "^2.29.0",
+    "serverless-prune-plugin": "^1.4.4"
+  }
+}
