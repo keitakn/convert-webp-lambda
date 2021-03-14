@@ -45,7 +45,7 @@ func createSession(region string) (*session.Session, error) {
 	return sess, nil
 }
 
-func s3Download(downloader *s3manager.Downloader, bucket string, key string) (f *os.File, err error) {
+func downloadFromS3(downloader *s3manager.Downloader, bucket string, key string) (f *os.File, err error) {
 	tmpFile, _ := os.CreateTemp("/tmp", "tmp_img_")
 
 	defer func() {
@@ -71,7 +71,7 @@ func s3Download(downloader *s3manager.Downloader, bucket string, key string) (f 
 	return tmpFile, err
 }
 
-func s3Upload(uploader *s3manager.Uploader, file *os.File, bucket string, key string) error {
+func uploadToS3(uploader *s3manager.Uploader, file *os.File, bucket string, key string) error {
 	_, err := uploader.Upload(&s3manager.UploadInput{
 		Bucket:      aws.String(bucket),
 		Body:        file,
@@ -92,7 +92,7 @@ func Handler(ctx context.Context, event events.S3Event) error {
 		bucket := record.S3.Bucket.Name
 		key := record.S3.Object.Key
 
-		file, err := s3Download(downloader, bucket, key)
+		file, err := downloadFromS3(downloader, bucket, key)
 		if err != nil {
 			return err
 		}
@@ -104,7 +104,7 @@ func Handler(ctx context.Context, event events.S3Event) error {
 
 		uploadKey := "encoded/" + uniqueId.String() + ".png"
 
-		err = s3Upload(uploader, file, os.Getenv("DESTINATION_BUCKET_NAME"), uploadKey)
+		err = uploadToS3(uploader, file, os.Getenv("DESTINATION_BUCKET_NAME"), uploadKey)
 		if err != nil {
 			return err
 		}
