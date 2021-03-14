@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -47,7 +46,7 @@ func createSession(region string) (*session.Session, error) {
 }
 
 func s3Download(downloader *s3manager.Downloader, bucket string, key string) (f *os.File, err error) {
-	tmpFile, _ := ioutil.TempFile("/tmp", "srctmp_")
+	tmpFile, _ := os.CreateTemp("/tmp", "tmp_img_")
 
 	defer func() {
 		err := os.Remove(tmpFile.Name())
