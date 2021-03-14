@@ -20,6 +20,7 @@ provider:
   environment:
     DEPLOY_STAGE: ${env:DEPLOY_STAGE}
     TRIGGER_BUCKET_NAME: ${env:TRIGGER_BUCKET_NAME}
+    DESTINATION_BUCKET_NAME: ${env:DESTINATION_BUCKET_NAME}
 
 custom:
   defaultStage: dev
@@ -44,5 +45,5 @@ functions:
           event: s3:ObjectCreated:*
           rules:
             - prefix: uploads/
-            - suffix: .jpg
+            - suffix: .png
           existing: true
