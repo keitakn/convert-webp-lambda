@@ -1,6 +1,5 @@
 import type { AWS } from '@serverless/typescript';
 
-import hello from '@functions/hello';
 import convertToWebp from '@functions/convertToWebp';
 
 const serverlessConfiguration: AWS = {
@@ -31,10 +30,6 @@ const serverlessConfiguration: AWS = {
         Resource: '*',
       },
     ],
-    apiGateway: {
-      minimumCompressionSize: 1024,
-      shouldStartNameWithService: true,
-    },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       DEPLOY_STAGE: process.env.DEPLOY_STAGE,
@@ -44,7 +39,7 @@ const serverlessConfiguration: AWS = {
     lambdaHashingVersion: '20201221',
   },
   // import the function via paths
-  functions: { hello, convertToWebp },
+  functions: { convertToWebp },
 };
 
 module.exports = serverlessConfiguration;
