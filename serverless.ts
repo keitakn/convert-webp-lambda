@@ -10,11 +10,25 @@ const serverlessConfiguration: AWS = {
       webpackConfig: './webpack.config.js',
       includeModules: true,
     },
+    prune: {
+      automatic: true,
+      number: 1,
+    },
   },
-  plugins: ['serverless-webpack'],
+  plugins: ['serverless-webpack', 'serverless-prune-plugin'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
+    stage: process.env.DEPLOY_STAGE,
+    region: 'ap-northeast-1',
+    profile: process.env.DEPLOY_STAGE === 'dev' ? 'nekochans-dev' : 'nekochans-prod',
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: ['s3:*'],
+        Resource: '*',
+      },
+    ],
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
