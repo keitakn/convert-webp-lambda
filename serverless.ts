@@ -23,13 +23,17 @@ const serverlessConfiguration: AWS = {
     region: 'ap-northeast-1',
     profile: process.env.DEPLOY_STAGE === 'dev' ? 'nekochans-dev' : 'nekochans-prod',
     logRetentionInDays: 3,
-    iamRoleStatements: [
-      {
-        Effect: 'Allow',
-        Action: ['s3:*'],
-        Resource: '*',
-      },
-    ],
+    iam: {
+      role: {
+        statements: [
+          {
+            Effect: 'Allow',
+            Action: ['s3:*'],
+            Resource: '*',
+          }
+        ]
+      }
+    },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       DEPLOY_STAGE: process.env.DEPLOY_STAGE,
