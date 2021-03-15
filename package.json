@@ -10,14 +10,12 @@
   },
   "dependencies": {
     "@middy/core": "^1.5.2",
-    "@middy/http-json-body-parser": "^1.5.2",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
     "@serverless/typescript": "^2.29.0",
     "@types/aws-lambda": "^8.10.72",
     "@types/node": "^14.14.34",
-    "json-schema-to-ts": "^1.6.0",
     "serverless": "^2.29.0",
     "serverless-prune-plugin": "^1.4.4",
     "serverless-webpack": "^5.3.5",
