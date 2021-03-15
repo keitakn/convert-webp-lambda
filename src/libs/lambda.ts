@@ -1,5 +1,5 @@
-import middy from "@middy/core"
+import middy from '@middy/core';
 
 export const middyfy = (handler) => {
   return middy(handler);
-}
+};

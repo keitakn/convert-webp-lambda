@@ -2,9 +2,11 @@ FROM public.ecr.aws/lambda/nodejs:12
 
 WORKDIR /node/app
 
+RUN npm install -g yarn
+
 COPY package*.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 

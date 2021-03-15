@@ -6,7 +6,13 @@
   "scripts": {
     "deploy": "serverless deploy -v",
     "remove": "serverless remove -v",
-    "set:dev-aws-credentials": "serverless config credentials --provider aws --key $DEV_AWS_ACCESS_KEY_ID --secret $DEV_AWS_SECRET_ACCESS_KEY --profile nekochans-dev"
+    "set:dev-aws-credentials": "serverless config credentials --provider aws --key $DEV_AWS_ACCESS_KEY_ID --secret $DEV_AWS_SECRET_ACCESS_KEY --profile nekochans-dev",
+    "lint:prettier": "prettier 'src/**/*.{js,ts,json}' --check",
+    "fix:prettier": "yarn run lint:prettier --write",
+    "lint:eslint": "eslint 'src/**/*.{js,ts}'",
+    "fix:eslint": "eslint --fix 'src/**/*.{js,ts}'",
+    "lint": "yarn run lint:prettier && yarn run lint:eslint",
+    "format": "yarn run fix:prettier && yarn run fix:eslint"
   },
   "dependencies": {
     "@middy/core": "^1.5.2",
@@ -19,8 +25,14 @@
     "@serverless/typescript": "^2.29.0",
     "@types/aws-lambda": "^8.10.72",
     "@types/node": "^14.14.34",
+    "@types/prettier": "^2.2.2",
     "@types/sharp": "^0.27.1",
     "@types/uuid": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "prettier": "^2.2.1",
     "serverless": "^2.29.0",
     "serverless-prune-plugin": "^1.4.4",
     "serverless-webpack": "^5.3.5",

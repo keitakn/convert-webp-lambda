@@ -7,11 +7,9 @@ export default {
       s3: {
         bucket: process.env.TRIGGER_BUCKET_NAME,
         event: 's3:ObjectCreated:*',
-        rules: [
-          { prefix: 'uploads/', suffix: '.png' },
-        ],
+        rules: [{ prefix: 'uploads/', suffix: '.png' }],
         existing: true,
-      }
-    }
-  ]
-}
+      },
+    },
+  ],
+};
