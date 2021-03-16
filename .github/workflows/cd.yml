@@ -19,8 +19,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        - run: |
-            yarn install --prefer-offline
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -42,5 +40,6 @@ jobs:
           TRIGGER_BUCKET_NAME: ${{ secrets.DEV_TRIGGER_BUCKET_NAME }}
           DESTINATION_BUCKET_NAME: ${{ secrets.DEV_DESTINATION_BUCKET_NAME }}
         run: |
+          yarn install
           yarn run set:dev-aws-credentials
           yarn run deploy
