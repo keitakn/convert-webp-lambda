@@ -36,6 +36,6 @@ jobs:
           docker-compose up --build -d
       - name: Deploy To AWS(dev)
         run: |
-          docker-compose exec -T yarn install
-          docker-compose exec -T yarn run set:dev-aws-credentials
-          docker-compose exec -T yarn run deploy
+          docker-compose exec -T node yarn install
+          docker-compose exec -T node yarn run set:dev-aws-credentials
+          docker-compose exec -T node yarn run deploy
