@@ -42,3 +42,11 @@ Webpフォーマットへの変換は [sharp](https://github.com/lovell/sharp) �
 `TRIGGER_BUCKET_NAME` の `uploads/` ディレクトリにアップロードされたファイルをWebpに変換し `DESTINATION_BUCKET_NAME` の `encoded/` ディレクトリに移動します。
 
 対応している画像フォーマットは `.png` だけですが、簡単な拡張で他の画像フォーマットにも対応可能です。
+
+## その他
+
+ディレクトリ構成は以下の公式テンプレートを利用しています。
+
+`sls create -t aws-nodejs-typescript -p [任意のディレクトリ名]` でプロジェクトの初期構成を作成して、そこから微調整しています。
+
+https://github.com/serverless/serverless/tree/master/lib/plugins/create/templates/aws-nodejs-typescript
