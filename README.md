@@ -1,5 +1,8 @@
 # convert-webp-lambda
 
+[![ci](https://github.com/keitakn/convert-webp-lambda/actions/workflows/ci.yml/badge.svg)](https://github.com/keitakn/convert-webp-lambda/actions/workflows/ci.yml)
+[![cd](https://github.com/keitakn/convert-webp-lambda/actions/workflows/cd.yml/badge.svg)](https://github.com/keitakn/convert-webp-lambda/actions/workflows/cd.yml)
+
 S3にアップロードされた画像ファイルをWebpフォーマットに変換する為のLambda関数です。
 
 ## Getting Started
