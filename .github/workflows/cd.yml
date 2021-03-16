@@ -25,7 +25,7 @@ jobs:
           aws-access-key-id: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.DEV_AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
-      - name: Deploy To AWS(dev)
+      - name: Docker set up
         env:
           DEPLOY_STAGE: dev
           DEV_AWS_ACCESS_KEY_ID: ${{ secrets.DEV_AWS_ACCESS_KEY_ID }}
@@ -33,6 +33,9 @@ jobs:
           TRIGGER_BUCKET_NAME: ${{ secrets.DEV_TRIGGER_BUCKET_NAME }}
           DESTINATION_BUCKET_NAME: ${{ secrets.DEV_DESTINATION_BUCKET_NAME }}
         run: |
-          yarn install
-          yarn run set:dev-aws-credentials
-          yarn run deploy
+          docker-compose up --build -d
+      - name: Deploy To AWS(dev)
+        run: |
+          docker-compose exec -T yarn install
+          docker-compose exec -T yarn run set:dev-aws-credentials
+          docker-compose exec -T yarn run deploy
