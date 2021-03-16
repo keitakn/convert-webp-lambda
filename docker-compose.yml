@@ -1,14 +1,19 @@
 version: '3.8'
 services:
-  go:
+  node:
     build:
       context: .
       dockerfile: ./Dockerfile
     restart: always
-    command: 'tail -f /dev/null'
+    tty: true
     volumes:
-      - ./:/go/app
-      - node_modules:/go/app/node_modules
+      - ./:/node/app
+      - node_modules:/node/app/node_modules
+      - $HOME/.aws:/root/.aws
+    environment:
+      DEPLOY_STAGE: ${DEPLOY_STAGE}
+      TRIGGER_BUCKET_NAME: ${TRIGGER_BUCKET_NAME}
+      DESTINATION_BUCKET_NAME: ${DESTINATION_BUCKET_NAME}
 volumes:
   node_modules:
     driver: 'local'
