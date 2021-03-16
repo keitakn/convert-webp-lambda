@@ -6,7 +6,6 @@
   "scripts": {
     "deploy": "serverless deploy -v",
     "remove": "serverless remove -v",
-    "set:dev-aws-credentials": "serverless config credentials --provider aws --key $DEV_AWS_ACCESS_KEY_ID --secret $DEV_AWS_SECRET_ACCESS_KEY --profile nekochans-dev",
     "lint:prettier": "prettier 'src/**/*.{js,ts,json}' --check",
     "fix:prettier": "yarn run lint:prettier --write",
     "lint:eslint": "eslint 'src/**/*.{js,ts}'",
