@@ -18,8 +18,9 @@ const convertToWebp: S3Handler = async (event: S3CreateEvent) => {
     .getObject({ Bucket: triggerBucketName, Key: objectKey })
     .promise();
 
-  // @ts-ignore
-  const sharpImageBuffer = await sharp(uploadedImage.Body)
+  const uploadedImageBody = uploadedImage.Body as Buffer;
+
+  const sharpImageBuffer = await sharp(uploadedImageBody)
     .webp({ lossless: true })
     .toBuffer();
 
