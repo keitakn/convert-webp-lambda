@@ -19,8 +19,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: |
-          npm ci
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -34,7 +32,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - run: yarn install
       - name: Deploy To AWS(dev)
         env:
           DEPLOY_STAGE: dev
@@ -43,5 +40,6 @@ jobs:
           TRIGGER_BUCKET_NAME: ${{ secrets.DEV_TRIGGER_BUCKET_NAME }}
           DESTINATION_BUCKET_NAME: ${{ secrets.DEV_DESTINATION_BUCKET_NAME }}
         run: |
+          yarn install --prefer-offline
           yarn run set:dev-aws-credentials
           yarn run deploy
